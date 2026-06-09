@@ -1,0 +1,45 @@
+{% extends 'mahasiswa/base.html' %}
+
+{% block title %}Tambah Mahasiswa{% endblock %}
+
+{% block content %}
+<div class="main-wrapper">
+    <div class="custom-card">
+
+        <h2 class="title-text">Tambah Mahasiswa</h2>
+        <p class="desc-text">
+            Silakan isi data mahasiswa baru.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div style="margin-bottom:15px;">
+                <input type="text"
+                       name="nim"
+                       placeholder="Masukkan NIM"
+                       style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e0;">
+            </div>
+
+            <div style="margin-bottom:15px;">
+                <input type="text"
+                       name="nama"
+                       placeholder="Masukkan Nama"
+                       style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e0;">
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <input type="text"
+                       name="programstudi"
+                       placeholder="Masukkan Program Studi"
+                       style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e0;">
+            </div>
+
+            <button type="submit" class="btn-blue" style="width:100%;">
+                Simpan Data
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

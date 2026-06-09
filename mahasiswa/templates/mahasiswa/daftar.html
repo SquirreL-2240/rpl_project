@@ -1,0 +1,116 @@
+{% extends 'mahasiswa/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'mahasiswa/css/style.css' %}">
+
+<!-- Bootstrap & FontAwesome -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Header -->
+<div class="custom-header">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+
+        <span class="fw-bold">
+            Praktikum RPL — Django
+        </span>
+
+        <div>
+            {% if user.is_authenticated %}
+                <span class="text-white me-3">
+                    Halo, {{ user.username }}
+                </span>
+
+                <a href="{% url 'logout' %}" class="btn btn-danger btn-sm">
+                    <i class="fas fa-sign-out-alt me-1"></i>
+                    Logout
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-sign-in-alt me-1"></i>
+                    Login
+                </a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+    <!-- Judul -->
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Daftar Mahasiswa</h2>
+            <p class="text-muted mb-0">
+                Menampilkan seluruh data mahasiswa terdaftar
+            </p>
+        </div>
+
+        <a href="{% url 'tambah_mahasiswa' %}" class="btn-tambah">
+            <i class="fas fa-plus me-2"></i>
+            Tambah Mahasiswa
+        </a>
+    </div>
+
+    <!-- Tabel -->
+    <div class="table-container shadow-sm">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th width="10%">#</th>
+                    <th width="25%">NIM</th>
+                    <th width="35%">Nama</th>
+                    <th width="20%">Program Studi</th>
+                    <th width="10%">Aksi</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for mhs in mahasiswas %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+
+                    <td>
+                        <span class="badge-nim">
+                            {{ mhs.nim }}
+                        </span>
+                    </td>
+
+                    <td class="fw-bold">
+                        {{ mhs.nama }}
+                    </td>
+
+                    <td>
+                        <span class="badge-prodi">
+                            {{ mhs.programstudi }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="{% url 'edit_mahasiswa' mhs.id %}" class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+
+                        <a href="{% url 'hapus_mahasiswa' mhs.id %}" class="btn btn-danger btn-sm">
+                            Hapus
+                        </a>
+                    </td>
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        Belum ada data mahasiswa.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="custom-footer">
+    © 2025 Praktikum RPL
+</div>
+
+{% endblock %}

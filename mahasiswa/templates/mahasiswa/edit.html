@@ -1,0 +1,45 @@
+{% extends 'mahasiswa/base.html' %}
+
+{% block title %}Edit Mahasiswa{% endblock %}
+
+{% block content %}
+<div class="main-wrapper">
+    <div class="custom-card">
+
+        <h2 class="title-text">Edit Mahasiswa</h2>
+        <p class="desc-text">
+            Ubah data mahasiswa.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div style="margin-bottom:15px;">
+                <input type="text"
+                       name="nim"
+                       value="{{ mhs.nim }}"
+                       style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e0;">
+            </div>
+
+            <div style="margin-bottom:15px;">
+                <input type="text"
+                       name="nama"
+                       value="{{ mhs.nama }}"
+                       style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e0;">
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <input type="text"
+                       name="programstudi"
+                       value="{{ mhs.programstudi }}"
+                       style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e0;">
+            </div>
+
+            <button type="submit" class="btn-blue" style="width:100%;">
+                Update Data
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
